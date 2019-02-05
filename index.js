@@ -5,7 +5,7 @@ let io = require("socket.io")(http);
 io.sockets.on("connection", socket => {
   console.log("connected");
   socket.on("disconnect", function() {
-
+    console.log('bye')
     let index = users[socket.room].findIndex(el => el === socket.nickname);
     users[socket.room].splice(index, 1);
 
@@ -18,6 +18,7 @@ io.sockets.on("connection", socket => {
   });
 
   socket.on("open-chat", chatInfo => {
+    console.log(chatInfo)
     socket.nickname = chatInfo.nickname;
     socket.room = chatInfo.room;
     socket.join(chatInfo.room);
